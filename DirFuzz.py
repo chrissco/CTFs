@@ -10,12 +10,15 @@ directories = []
 successfull = []
 
 for dir in file:
-  for ext in extensions:
-    response = requests.get("{}/{}.{}".format(host,dir,ext))
-    if 200 == response.status_code:
-      print("{}: {}.{}".format(response.status_code,dir,ext))
-      successful_dir = "{}.{}".format(dir,ext)
-      successful.append(successful_dir)
+  if "#" in dir:
+    pass
+  else:
+    for ext in extensions:
+      response = requests.get("{}/{}.{}".format(host,dir,ext))
+      if 200 == response.status_code:
+        print("{}: {}.{}".format(response.status_code,dir,ext))
+        successful_dir = "{}.{}".format(dir,ext)
+        successful.append(successful_dir)
 for success in successful:
   print("Status of 200 on: {}".format(success))
   outfile.write("200: {}".format(success))
